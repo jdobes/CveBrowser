@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cz.utb.jdobes.cvebrowser.network.VmaasApi
+import cz.utb.jdobes.cvebrowser.network.VmaasFilter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +29,7 @@ class ListViewModel : ViewModel() {
      * Sets the value of the status LiveData to the VMaas API status.
      */
     private fun getCveList() {
-        VmaasApi.retrofitService.getCves().enqueue(
+        VmaasApi.retrofitService.getCveList(VmaasFilter()).enqueue(
             object: Callback<String> {
                 override fun onFailure(call: Call<String>, t: Throwable) {
                     _response.value = "Failure: " + t.message
