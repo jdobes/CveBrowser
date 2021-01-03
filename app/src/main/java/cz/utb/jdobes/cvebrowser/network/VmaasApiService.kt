@@ -2,10 +2,8 @@ package cz.utb.jdobes.cvebrowser.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -17,7 +15,6 @@ private val moshi = Moshi.Builder()
     .build()
 
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
@@ -25,8 +22,7 @@ private val retrofit = Retrofit.Builder()
 interface VmaasApiService {
     @Headers("Content-Type: application/json")
     @POST("cves")
-    fun getCveList(@Body filter: VmaasFilter):
-            Call<String>
+    suspend fun getCveList(@Body filter: VmaasFilter): VmaasResponse
 }
 
 object VmaasApi {

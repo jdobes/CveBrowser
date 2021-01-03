@@ -3,11 +3,10 @@ package cz.utb.jdobes.cvebrowser.fragments.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cz.utb.jdobes.cvebrowser.network.VmaasApi
 import cz.utb.jdobes.cvebrowser.network.VmaasFilter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
 
@@ -29,15 +28,13 @@ class ListViewModel : ViewModel() {
      * Sets the value of the status LiveData to the VMaas API status.
      */
     private fun getCveList() {
-        VmaasApi.retrofitService.getCveList(VmaasFilter()).enqueue(
-            object: Callback<String> {
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    _response.value = "Failure: " + t.message
-                }
-
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    _response.value = response.body()
-                }
-            })
+        viewModelScope.launch {
+            try {
+                val result = VmaasApi.retrofitService.getCveList(VmaasFilter())
+                _response.value = "Success: ${result.cveList.size} CVEs retrieved"
+            } catch (e: Exception) {
+                _response.value = "Failure: ${e.message}"
+            }
+        }
     }
 }
