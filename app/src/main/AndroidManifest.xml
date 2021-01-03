@@ -9,13 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CveBrowser">
-        <activity android:name=".MainActivity"
-                  android:theme="@style/Theme.CveBrowser.NoActionBar">
+        <activity android:name=".SplashActivity"
+                  android:theme="@style/SplashStyle"
+                  android:noHistory="true"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.CveBrowser.NoActionBar">
         </activity>
     </application>
 
