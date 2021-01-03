@@ -7,19 +7,19 @@
     <data>
         <variable
             name="viewModel"
-            type="cz.utb.jdobes.cvebrowser.fragments.list.ListViewModel" />
+            type="cz.utb.jdobes.cvebrowser.viewmodels.ListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.list.ListFragment">
+        tools:context=".ui.fragments.ListFragment">
 
         <TextView
             android:id="@+id/textview_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.response}"
+            android:text="@{viewModel.cves[0].synopsis}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

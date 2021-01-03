@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CveBrowser">
-        <activity android:name=".SplashActivity"
+        <activity android:name=".ui.SplashActivity"
                   android:theme="@style/SplashStyle"
                   android:noHistory="true"
                   android:screenOrientation="portrait">
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/Theme.CveBrowser.NoActionBar">
         </activity>
     </application>

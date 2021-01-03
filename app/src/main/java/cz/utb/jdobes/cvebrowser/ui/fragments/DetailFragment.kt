@@ -1,4 +1,4 @@
-package cz.utb.jdobes.cvebrowser.fragments.detail
+package cz.utb.jdobes.cvebrowser.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

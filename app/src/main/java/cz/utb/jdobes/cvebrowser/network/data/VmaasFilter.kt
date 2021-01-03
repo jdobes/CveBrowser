@@ -1,4 +1,4 @@
-package cz.utb.jdobes.cvebrowser.network
+package cz.utb.jdobes.cvebrowser.network.data
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

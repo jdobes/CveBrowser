@@ -2,6 +2,8 @@ package cz.utb.jdobes.cvebrowser.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import cz.utb.jdobes.cvebrowser.network.data.VmaasFilter
+import cz.utb.jdobes.cvebrowser.network.data.VmaasResponse
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body

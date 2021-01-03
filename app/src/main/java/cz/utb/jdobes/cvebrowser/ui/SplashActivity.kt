@@ -1,4 +1,4 @@
-package cz.utb.jdobes.cvebrowser
+package cz.utb.jdobes.cvebrowser.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

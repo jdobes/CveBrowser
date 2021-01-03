@@ -1,13 +1,16 @@
-package cz.utb.jdobes.cvebrowser.fragments.list
+package cz.utb.jdobes.cvebrowser.ui.fragments
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import cz.utb.jdobes.cvebrowser.R
 import cz.utb.jdobes.cvebrowser.databinding.FragmentListBinding
+import cz.utb.jdobes.cvebrowser.viewmodels.ListViewModel
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -30,6 +33,12 @@ class ListFragment : Fragment() {
         binding.viewModel = viewModel
 
         setHasOptionsMenu(true)
+
+        // Observer for the network error.
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        })
+
         return binding.root
     }
 
@@ -44,5 +53,12 @@ class ListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun onNetworkError() {
+        if(!viewModel.isNetworkErrorShown.value!!) {
+            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            viewModel.onNetworkErrorShown()
+        }
     }
 }
