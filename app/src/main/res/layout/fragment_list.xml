@@ -15,10 +15,27 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragments.ListFragment">
 
+        <TextView
+            android:id="@+id/cve_title"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/identifier_label"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+
+            tools:text="@string/identifier_label"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
             tools:listitem="@layout/cve_item" />
         <ProgressBar
             android:id="@+id/loading_spinner"
