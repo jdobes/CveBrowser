@@ -30,17 +30,45 @@
 
             <TextView
                 android:id="@+id/cve_title"
-                android:layout_width="180dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@{cve.synopsis}"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 tools:text="CVE-2020-1111"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/impact"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:text="@{cve.impact}"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:text="Moderate"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cve_title"/>
+
+            <TextView
+                android:id="@+id/cvss"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:text="@{cve.cvss3Score ?? cve.cvss2Score ?? @string/unknown_cvss}"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:text="9.0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/impact"/>
 
             <View
                 android:id="@+id/clickableOverlay"
