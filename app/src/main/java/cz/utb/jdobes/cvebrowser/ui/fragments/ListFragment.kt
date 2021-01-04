@@ -1,6 +1,7 @@
 package cz.utb.jdobes.cvebrowser.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -47,10 +48,25 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         })
 
+        val _layoutManager = LinearLayoutManager(context)
         binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = _layoutManager
             adapter = viewModelAdapter
         }
+        // when scrolling fetch next page
+        binding.root.findViewById<RecyclerView>(R.id.recycler_view).addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val visibleItemCount = _layoutManager.childCount
+                val pastVisibleItem = _layoutManager.findFirstCompletelyVisibleItemPosition()
+                val total = viewModelAdapter!!.itemCount
+                //Log.v("CVEBROWSER", "dy: " + dy.toString() + ", visibleItemCount: " + visibleItemCount.toString() + ", pastVisibleItem: " + pastVisibleItem.toString() + ", total: " + total.toString())
+                if ((dy > 0) && (viewModel.isLoading.value == false) && ((visibleItemCount+pastVisibleItem) >= total)) {
+                    viewModel.page++
+                    viewModel.fetchDataFromRepository()
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
 
         setHasOptionsMenu(true)
 
@@ -88,7 +104,7 @@ class CveClick(val block: (Cve) -> Unit) {
     /**
      * Called when a cve is clicked
      *
-     * @param cve the video that was clicked
+     * @param cve the cve that was clicked
      */
     fun onClick(cve: Cve) = block(cve)
 }

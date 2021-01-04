@@ -24,7 +24,9 @@ interface VmaasApiService {
     @Headers("Authorization: Basic dXRiLWFibXRlLWRlbW86a2Y0X0dRMXo=") // utb-abmte-demo account
     @GET("vulnerabilities/cves")
     suspend fun getCveList(@Query("affecting") affecting: String = "true,true",
-                           @Query("sort") sort: String = "-public_date"): VmaasResponse
+                           @Query("sort") sort: String = "-public_date",
+                           @Query("page") page: Int = 1,
+                           @Query("page_size") pageSize: Int = 20): VmaasResponse
 }
 
 object VmaasApi {
