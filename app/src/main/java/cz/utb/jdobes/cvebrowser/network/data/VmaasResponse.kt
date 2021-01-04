@@ -4,18 +4,23 @@ import com.squareup.moshi.Json
 import cz.utb.jdobes.cvebrowser.database.CveDbItem
 
 data class VmaasResponse(
-    @Json(name = "cve_list") val cveList: Map<String, CveResponseItem>
+    @Json(name = "data") val cveList: List<CveResponseItem>
 )
 
+// wrapped
 data class CveResponseItem(
+    val attributes: CveItem
+)
+
+data class CveItem(
     val synopsis: String,
     val description: String
 )
 
 fun VmaasResponse.asDatabaseModel(): List<CveDbItem> {
-    return cveList.values.map {
+    return cveList.map {
         CveDbItem(
-            synopsis = it.synopsis,
-            description = it.description)
+            synopsis = it.attributes.synopsis,
+            description = it.attributes.description)
     }
 }
