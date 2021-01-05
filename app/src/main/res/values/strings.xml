@@ -1,15 +1,10 @@
 <resources>
     <string name="app_name">CVE Browser</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="identifier_label">Name</string>
     <string name="impact_label">Impact</string>
     <string name="cvss_label">CVSS Score</string>
     <string name="unknown_cvss">Unknown</string>
+    <string name="detail_fragment_header">CVE Detail</string>
 </resources>

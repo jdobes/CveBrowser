@@ -49,6 +49,7 @@ class ListFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModelAdapter = CveListAdapter(CveClick {
+            (activity as MainActivity).currentCveDetail = it.synopsis
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         })
 
@@ -71,7 +72,7 @@ class ListFragment : Fragment() {
             }
         })
 
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
 
         // Observer for the network error.
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->

@@ -9,6 +9,9 @@ interface CveDao {
     @Query("select * from cvedbitem order by publicdate desc")
     fun getCves(): LiveData<List<CveDbItem>>
 
+    @Query("select * from cvedbitem where synopsis=:name")
+    fun getCve(name: String): LiveData<CveDbItem>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll( videos: List<CveDbItem>)
 

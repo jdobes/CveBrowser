@@ -16,6 +16,13 @@ class CveRepository(private val database: CveDatabase) {
         it.asDomainModel()
     }
 
+    fun getCve(name: String): LiveData<Cve> {
+        val cve = Transformations.map(database.cveDao.getCve(name)) {
+            it.asDomainModel()
+        }
+        return cve
+    }
+
     suspend fun refreshCves(page: Int = 1, pageSize: Int = 50, init: Boolean = false) {
         withContext(Dispatchers.IO) {
             val cves = VmaasApi.retrofitService.getCveList(page = page, pageSize = pageSize)

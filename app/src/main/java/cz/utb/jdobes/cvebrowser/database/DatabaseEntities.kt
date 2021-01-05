@@ -26,3 +26,14 @@ fun List<CveDbItem>.asDomainModel(): List<Cve> {
         )
     }
 }
+
+fun CveDbItem.asDomainModel(): Cve {
+    return Cve(
+        synopsis = this.synopsis,
+        description = this.description,
+        impact = this.impact,
+        publicDate = this.publicDate,
+        cvss3Score = this.cvss3Score,
+        cvss2Score = this.cvss2Score
+    )
+}
