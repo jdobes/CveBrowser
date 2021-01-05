@@ -16,6 +16,7 @@ import cz.utb.jdobes.cvebrowser.R
 import cz.utb.jdobes.cvebrowser.databinding.CveItemBinding
 import cz.utb.jdobes.cvebrowser.databinding.FragmentListBinding
 import cz.utb.jdobes.cvebrowser.domain.Cve
+import cz.utb.jdobes.cvebrowser.ui.MainActivity
 import cz.utb.jdobes.cvebrowser.viewmodels.ListViewModel
 
 /**
@@ -33,6 +34,9 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Disable back button on this fragment
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         val binding: FragmentListBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_list,

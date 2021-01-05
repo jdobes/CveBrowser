@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import cz.utb.jdobes.cvebrowser.R
+import cz.utb.jdobes.cvebrowser.ui.MainActivity
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -18,15 +19,9 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Enable back button on this fragment
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
     }
 }
