@@ -52,7 +52,8 @@
                 tools:text="Moderate"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cve_title"/>
+                app:layout_constraintStart_toEndOf="@id/cve_title"
+                app:layout_constraintEnd_toStartOf="@id/cvss"/>
 
             <TextView
                 android:id="@+id/cvss"
@@ -65,7 +66,7 @@
                 tools:text="9.0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/impact"/>
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <View
                 android:id="@+id/clickableOverlay"
