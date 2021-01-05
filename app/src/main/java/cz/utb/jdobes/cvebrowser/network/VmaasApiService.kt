@@ -26,7 +26,8 @@ interface VmaasApiService {
     suspend fun getCveList(@Query("affecting") affecting: String = "true,true",
                            @Query("sort") sort: String = "-public_date",
                            @Query("page") page: Int = 1,
-                           @Query("page_size") pageSize: Int = 50): VmaasResponse
+                           @Query("page_size") pageSize: Int = 50,
+                           @Query("filter") filter: String = ""): VmaasResponse
 }
 
 object VmaasApi {

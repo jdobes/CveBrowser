@@ -1,8 +1,10 @@
 package cz.utb.jdobes.cvebrowser.ui.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -72,7 +74,7 @@ class ListFragment : Fragment() {
             }
         })
 
-        //setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
         // Observer for the network error.
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
@@ -94,6 +96,44 @@ class ListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                filterDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun filterDialog() {
+        val alertDialog: AlertDialog? = activity?.let {
+            val builder = AlertDialog.Builder(it)
+            val view = LayoutInflater.from(it).inflate(R.layout.fragment_dialog, null)
+            view.findViewById<EditText>(R.id.filter).setText(viewModel.filter)
+            builder.apply {
+                setPositiveButton(R.string.action_filter_ok,
+                        DialogInterface.OnClickListener { _, _ ->
+                            val filterText = view.findViewById<EditText>(R.id.filter).text.toString()
+                            viewModel.filter = filterText
+                            viewModel.page = 1
+                            viewModel.fetchDataFromRepository()
+                        })
+                setNegativeButton(R.string.action_filter_cancel, null)
+                setNeutralButton(R.string.action_filter_clear, DialogInterface.OnClickListener { _, _ ->
+                    viewModel.filter = ""
+                    viewModel.page = 1
+                    viewModel.fetchDataFromRepository()
+                })
+                setTitle(R.string.action_filter)
+                setView(view)
+            }
+            builder.create()
+        }
+        alertDialog?.show()
     }
 
     private fun onNetworkError() {

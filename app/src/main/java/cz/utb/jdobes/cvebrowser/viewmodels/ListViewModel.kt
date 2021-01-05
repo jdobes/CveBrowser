@@ -20,10 +20,12 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
         get() = _isNetworkErrorShown
 
     private val pageSize = 50
-    private var page = 1
+    var page = 1
     private var _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
+
+    var filter = ""
 
     init {
         fetchDataFromRepository(init = true)
@@ -33,7 +35,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
-                cveRepository.refreshCves(page = page, pageSize = pageSize, init = init)
+                cveRepository.refreshCves(page = page, pageSize = pageSize, init = init, filter = filter)
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
                 page++;

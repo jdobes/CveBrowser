@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">CVE Browser</string>
-    <string name="action_settings">Settings</string>
-
+    <string name="action_filter">Filter</string>
+    <string name="action_filter_tip">searched text</string>
+    <string name="action_filter_clear">Clear</string>
+    <string name="action_filter_ok">OK</string>
+    <string name="action_filter_cancel">Cancel</string>
     <string name="identifier_label">Name</string>
     <string name="impact_label">Impact</string>
     <string name="cvss_label">CVSS Score</string>

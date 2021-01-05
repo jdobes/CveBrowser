@@ -12,6 +12,8 @@ import kotlinx.coroutines.withContext
 
 class CveRepository(private val database: CveDatabase) {
 
+    private var currentFilter = ""
+
     val cves: LiveData<List<Cve>> = Transformations.map(database.cveDao.getCves()) {
         it.asDomainModel()
     }
@@ -23,11 +25,12 @@ class CveRepository(private val database: CveDatabase) {
         return cve
     }
 
-    suspend fun refreshCves(page: Int = 1, pageSize: Int = 50, init: Boolean = false) {
+    suspend fun refreshCves(page: Int = 1, pageSize: Int = 50, init: Boolean = false, filter: String = "") {
         withContext(Dispatchers.IO) {
-            val cves = VmaasApi.retrofitService.getCveList(page = page, pageSize = pageSize)
-            if (init) {
+            val cves = VmaasApi.retrofitService.getCveList(page = page, pageSize = pageSize, filter = filter)
+            if (init || currentFilter != filter) {
                 database.cveDao.clearCves()
+                currentFilter = filter
             }
             database.cveDao.insertAll(cves.asDatabaseModel())
         }
