@@ -19,26 +19,24 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    var page = 1
-    val pageSize = 20
+    private val pageSize = 50
+    private var page = 1
     private var _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    /**
-     * Call fetchDataFromRepository() on init so we can display status immediately.
-     */
     init {
-        fetchDataFromRepository(pageSize = 100) // Fetch more Cves on first run
+        fetchDataFromRepository(init = true)
     }
 
-    fun fetchDataFromRepository(pageSize: Int = this.pageSize) {
+    fun fetchDataFromRepository(init: Boolean = false) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
-                cveRepository.refreshCves(page = page, pageSize = pageSize)
+                cveRepository.refreshCves(page = page, pageSize = pageSize, init = init)
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
+                page++;
 
             } catch (networkError: IOException) {
                 // Show a Toast error message and hide the progress bar.

@@ -16,9 +16,12 @@ class CveRepository(private val database: CveDatabase) {
         it.asDomainModel()
     }
 
-    suspend fun refreshCves(page: Int = 1, pageSize: Int = 20) {
+    suspend fun refreshCves(page: Int = 1, pageSize: Int = 50, init: Boolean = false) {
         withContext(Dispatchers.IO) {
             val cves = VmaasApi.retrofitService.getCveList(page = page, pageSize = pageSize)
+            if (init) {
+                database.cveDao.clearCves()
+            }
             database.cveDao.insertAll(cves.asDatabaseModel())
         }
     }

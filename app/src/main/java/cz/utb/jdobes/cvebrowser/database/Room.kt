@@ -6,11 +6,14 @@ import androidx.room.*
 
 @Dao
 interface CveDao {
-    @Query("select * from cvedbitem")
+    @Query("select * from cvedbitem order by publicdate desc")
     fun getCves(): LiveData<List<CveDbItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll( videos: List<CveDbItem>)
+
+    @Query("delete from cvedbitem")
+    fun clearCves()
 }
 
 @Database(entities = [CveDbItem::class], version = 1, exportSchema = false)

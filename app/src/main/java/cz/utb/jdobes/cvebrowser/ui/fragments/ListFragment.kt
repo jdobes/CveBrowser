@@ -65,7 +65,6 @@ class ListFragment : Fragment() {
                 val total = viewModelAdapter!!.itemCount
                 //Log.v("CVEBROWSER", "dy: " + dy.toString() + ", visibleItemCount: " + visibleItemCount.toString() + ", pastVisibleItem: " + pastVisibleItem.toString() + ", total: " + total.toString())
                 if ((dy > 0) && (viewModel.isLoading.value == false) && ((visibleItemCount+pastVisibleItem) >= total)) {
-                    viewModel.page++
                     viewModel.fetchDataFromRepository()
                 }
                 super.onScrolled(recyclerView, dx, dy)
