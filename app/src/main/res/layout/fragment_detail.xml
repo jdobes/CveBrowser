@@ -9,23 +9,163 @@
             type="cz.utb.jdobes.cvebrowser.viewmodels.DetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragments.DetailFragment">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="5dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp">
 
-        <TextView
-            android:id="@+id/impact"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:text="@{viewModel.cve.description}"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            tools:text="lorem ipsum"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="wrap_content"
+            tools:context=".ui.fragments.DetailFragment">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/cve_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.cve.synopsis}"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp"
+                app:layout_goneMarginStart="4dp"
+                tools:text="CVE-2020-1111"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@{viewModel.cve.description}"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                tools:text="lorem ipsum"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cve_title"/>
+
+            <TextView
+                android:id="@+id/public_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/public_date_detail"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="@string/public_date_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description"/>
+
+            <TextView
+                android:id="@+id/public_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:text="@{viewModel.cve.publicDate}"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                tools:text="2020-01-01"
+                app:layout_constraintStart_toEndOf="@id/cvss3_label"
+                app:layout_constraintTop_toBottomOf="@id/description"/>
+
+            <TextView
+                android:id="@+id/impact_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/impact_detail"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="@string/impact_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/public_date_label"/>
+
+            <TextView
+                android:id="@+id/impact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.cve.impact}"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                tools:text="Important"
+                app:layout_constraintStart_toEndOf="@id/cvss3_label"
+                app:layout_constraintTop_toBottomOf="@id/public_date"/>
+
+            <TextView
+                android:id="@+id/cvss2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/cvss2_detail"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="@string/cvss2_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/impact_label"/>
+
+            <TextView
+                android:id="@+id/cvss2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.cve.cvss2Score ?? @string/unknown_cvss}"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                tools:text="9.9"
+                app:layout_constraintStart_toEndOf="@id/cvss3_label"
+                app:layout_constraintTop_toBottomOf="@id/impact"/>
+
+            <TextView
+                android:id="@+id/cvss3_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/cvss3_detail"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="@string/cvss3_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvss2_label"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/cvss3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{viewModel.cve.cvss3Score ?? @string/unknown_cvss}"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                tools:text="9.9"
+                app:layout_constraintStart_toEndOf="@id/cvss3_label"
+                app:layout_constraintTop_toBottomOf="@id/cvss2_label"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
 </layout>

@@ -10,4 +10,8 @@
     <string name="cvss_label">CVSS Score</string>
     <string name="unknown_cvss">Unknown</string>
     <string name="detail_fragment_header">CVE Detail</string>
+    <string name="public_date_detail">Publish date:</string>
+    <string name="impact_detail">Impact:</string>
+    <string name="cvss2_detail">CVSS 2.0 Score:</string>
+    <string name="cvss3_detail">CVSS 3.0 Score:</string>
 </resources>
